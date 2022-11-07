@@ -8,10 +8,12 @@ const Header = () => {
         <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
       </div>
       <div className="mr-28">
-        <Link className="mr-3">Home</Link>
+        <Link to='/home' className="mr-3">Home</Link>
         <Link className="mr-3">Add Service</Link>
         <Link className="mr-3">Blogs</Link>
         <Link className="mr-3">My Review</Link>
+        <Link to='/login' className="mr-3">Login</Link>
+        <Link to='register' className="mr-3">Register</Link>
       </div>
 
       <div className="flex-none gap-2">
