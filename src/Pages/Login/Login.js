@@ -1,13 +1,42 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
+
+  const { loginUserWithEmailAndPassword, googleLogin } =
+    useContext(AuthContext);
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data) => {
     const { email, password } = data;
-    console.log(email, password);
+
+    loginUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        console.log(result.user);
+
+        navigate(from, { replace: true });
+        toast.success("Login Successfully!");
+      })
+      .catch((error) => {
+        const err = error?.message;
+        toast.error(err);
+      });
+  };
+  const handleGoogleSignIn = () => {
+    googleLogin()
+      .then((result) => {
+        navigate(from, { replace: true });
+        toast.success("Login Successfully");
+      })
+      .catch((error) => toast.error(error.message));
   };
   return (
     <div>
@@ -63,7 +92,7 @@ const Login = () => {
                 </button>
               </p>
               <div
-                onClick={""}
+                onClick={handleGoogleSignIn}
                 id="login-id"
                 className="flex justify-center items-center border cursor-pointer bg-emerald-200 hover:bg-emerald-300  rounded-full"
               >
@@ -78,6 +107,7 @@ const Login = () => {
                 <p className="px-4">continue with Github</p>
               </div>
             </div>
+            <Toaster></Toaster>
           </form>
         </div>
       </div>

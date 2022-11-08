@@ -1,13 +1,56 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Register = () => {
-    const {register, handleSubmit} = useForm()
 
-    const onSubmit =(data)=>{
-        const { email, name, photoURL, password } = data;
-    }
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+    const {
+      createUserEmailAndPassword,
+      googleLogin,
+      userUpdateProfile,
+    } = useContext(AuthContext);
+  
+    const { register, handleSubmit } = useForm();
+    const onSubmit = (data) => {
+      const { email, name, photoURL, password } = data;
+      console.log(photoURL);
+  
+      createUserEmailAndPassword(email, password)
+        .then((result) => {
+          toast.success(" Login successfully ");
+          navigate(from, { replace: true });
+  
+          handleUpdateProfile(name, photoURL);
+        })
+        .catch((error) => toast.error(error));
+    };
+  
+    const handleGoogleSignIn = () => {
+      googleLogin()
+        .then((result) => {
+          navigate(from, { replace: true });
+        })
+        .catch((error) => toast.error(error));
+    };
+  
+    const handleUpdateProfile = (name, photoURL) => {
+      const profile = {
+        displayName: name,
+        photoURL: photoURL,
+      };
+  
+      userUpdateProfile(profile)
+        .then((result) => {
+          console.log(result.user);
+        })
+        .catch((error) => {});
+    };
     return (
         <div>
         <div className="hero min-h-screen bg-base-200">
@@ -83,7 +126,7 @@ const Register = () => {
                   </button>
                 </p>
                 <div
-                  onClick={''}
+                  onClick={handleGoogleSignIn}
                   className="flex justify-center items-center cursor-pointer border bg-emerald-200 hover:bg-emerald-300 rounded-full"
                 >
                   <img className="w-12 " src={''} alt="" />

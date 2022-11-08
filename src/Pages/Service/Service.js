@@ -11,7 +11,7 @@ const Service = ({ service }) => {
       <figure>
         <PhotoView src={service?.image}>
         <img
-          className="lg:w-[600px]  lg:h-full"
+          className=" w-[400px]lg:w-[600px]  lg:h-full"
           src={service.image}
           alt="Album"
         />
