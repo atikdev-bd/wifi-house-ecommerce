@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
-import  {toast, Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import userIcon from "../../../Assets/img/icons8-user-64.png";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
 
@@ -12,7 +13,7 @@ const Header = () => {
   const handleLogOut = () => {
     logOut()
       .then((res) => {
-        toast.success('logout successfully')
+        toast.success("logout successfully");
       })
       .catch((error) => {});
   };
@@ -34,7 +35,10 @@ const Header = () => {
                 <Link className="mr-3 hover:text-yellow-700">My Review</Link>
               </div>
               <div className="ml-4 mt-1">
-                  <FaSignOutAlt onClick={handleLogOut} className="hover:text-stone-400"></FaSignOutAlt>
+                <FaSignOutAlt
+                  onClick={handleLogOut}
+                  className="hover:text-stone-400"
+                ></FaSignOutAlt>
               </div>
             </div>
           </>
@@ -57,7 +61,11 @@ const Header = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" alt="" />
+              {user?.photoURL ? (
+                <img src={user?.photoURL} alt="" />
+              ) : (
+                <img src={userIcon} alt="" />
+              )}
             </div>
           </label>
           <ul
