@@ -1,18 +1,23 @@
 import React from 'react';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 
 const ServiceCart = ({service}) => {
     console.log(service)
 
     const {serviceName, description, price, image} = service
     return (
-        <div>
+        <PhotoProvider>
+            <div>
             <div className="card lg:card-side bg-base-100 lg:h-[300px]  shadow-xl mb-4">
       <figure>
-        <img
+     <PhotoView src={image}>
+     <img
           className="lg:w-[600px]  lg:h-full"
           src={image}
           alt="Album"
         />
+     </PhotoView>
       </figure>
       <div className="card-body bg-gradient-to-r from-emerald-600 via-cyan-700 to-zinc-600">
         <h2 className="card-title">{serviceName}</h2>
@@ -25,6 +30,7 @@ const ServiceCart = ({service}) => {
       </div>
     </div>
         </div>
+        </PhotoProvider>
     );
 };
 
