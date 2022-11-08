@@ -26,7 +26,7 @@ const ServiceCart = ({service}) => {
 
         <h3 className="text-xl font-bold">Price : {price}</h3>
         <div className="card-actions justify-end">
-         <Link to={`/allService/${_id}`}> <button className="btn glass">Details</button></Link>
+         <Link to={`/service/${_id}`}> <button className="btn glass">Details</button></Link>
         </div>
       </div>
     </div>

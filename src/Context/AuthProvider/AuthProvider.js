@@ -4,7 +4,7 @@ import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthState
  export const AuthContext = createContext()
 
  const auth = getAuth(app);
- console.log(auth);
+
 
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState("");
@@ -17,7 +17,9 @@ const AuthProvider = ({children}) => {
      fetch('http://localhost:5000/services')
      .then(res => res.json())
      .then(data => setServices(data))
-       .catch(error =>console.log(error))
+       .catch(error =>{
+
+       })
 
     },[])
 

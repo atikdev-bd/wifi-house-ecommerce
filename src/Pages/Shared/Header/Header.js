@@ -8,7 +8,6 @@ import "./Header.css";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
-  console.log(user);
 
   const handleLogOut = () => {
     logOut()
@@ -72,40 +71,49 @@ const Header = () => {
             tabIndex={0}
             className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
           >
-            <li>
-              <Link className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </Link>
-            </li>
             <div className="lg:hidden block">
-              <li>
-                {" "}
-                <Link className="mr-3 hover:text-cyan-400">Add Service</Link>
-              </li>
-              <li>
-                <Link className="mr-3 hover:text-blue-900">Blogs</Link>
-              </li>
-              <li>
-                <Link className="mr-3 hover:text-yellow-700">My Review</Link>
-              </li>
-              <li>
-                {" "}
-                <Link to="register" className="mr-3 hover:text-green-500">
-                  Register
-                </Link>
-              </li>
-              <li>
-                <Link to="/login" className="mr-3 hover:text-sky-700">
-                  Login
-                </Link>
-              </li>
+              {user?.uid ? (
+                <>
+                  {" "}
+                  <li>
+                    {" "}
+                    <Link className="mr-3 hover:text-cyan-400">
+                      Add Service
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+                  </li>
+                  <li>
+                    <Link className="mr-3 hover:text-yellow-700">
+                      My Review
+                    </Link>
+                  </li>
+                  <li>
+                    <Link onClick={handleLogOut}>Logout</Link>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    {" "}
+                    <Link to="register" className="mr-3 hover:text-green-500">
+                      Register
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/login" className="mr-3 hover:text-sky-700">
+                      Login
+                    </Link>
+                  </li>
+                </>
+              )}
             </div>
             <li>
               <Link>Settings</Link>
             </li>
             <li>
-              <Link>Logout</Link>
+              <Link>Profile</Link>
             </li>
           </ul>
           <Toaster></Toaster>

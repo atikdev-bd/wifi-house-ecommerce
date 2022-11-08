@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
+import  { toast,Toaster } from "react-hot-toast";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const AddService = () => {
+  const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {};
+  const onSubmit = (data) => {
+    console.log(data);
+    fetch("http://localhost:5000/add", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    .then(res =>res.json())
+    .then(data =>{
+      console.log(data)
+      
+    })
+    
+    
+   
+  };
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col">
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl font-bold">Add Your Service !</h1>
+            <h1 className="text-5xl font-bold">Add Service Here !</h1>
           </div>
 
           <form
@@ -22,9 +42,9 @@ const AddService = () => {
                   <span className="label-text">Service Name</span>
                 </label>
                 <input
-                  {...register("name")}
+                  {...register("serviceName")}
                   type="text"
-                  name="name"
+                  name="serviceName"
                   placeholder="service name"
                   className="input input-bordered"
                   required
@@ -60,6 +80,8 @@ const AddService = () => {
                 </label>
                 <input
                   {...register("email")}
+                  readOnly
+                  defaultValue={user?.email}
                   type="text"
                   name="email"
                   placeholder="email"
@@ -68,16 +90,22 @@ const AddService = () => {
                 />
               </div>
               <div>
-              <label className="label">
+                <label className="label">
                   <span className="label-text">Add Description</span>
                 </label>
-              <textarea className="textarea textarea-bordered rounded-sm" placeholder="Bio"></textarea>
+                <textarea
+                  name="description"
+                  {...register("description")}
+                  className="textarea  textarea-bordered rounded-sm"
+                  placeholder="Bio"
+                ></textarea>
               </div>
 
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Add</button>
               </div>
             </div>
+            <Toaster></Toaster>
           </form>
         </div>
       </div>
