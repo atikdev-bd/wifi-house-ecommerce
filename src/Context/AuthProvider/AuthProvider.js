@@ -7,24 +7,23 @@ import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthState
  console.log(auth);
 
 const AuthProvider = ({children}) => {
+    const [user, setUser] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
 
     const [services, setServices ] = useState([])
     
     useEffect(()=>{
-
      fetch('http://localhost:5000/services')
      .then(res => res.json())
      .then(data => setServices(data))
        .catch(error =>console.log(error))
 
-
     },[])
 
     const provider = new GoogleAuthProvider();
 
-  const [user, setUser] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+
 
   /// create user with email and password //
   const createUserEmailAndPassword = (email, password) => {

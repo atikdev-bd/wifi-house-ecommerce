@@ -1,8 +1,9 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import toast from 'react-hot-toast';
+import  {toast, Toaster } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
+import GoogleSvg from '../../Assets/svg/icons8-google.svg'
 
 const Register = () => {
 
@@ -129,16 +130,10 @@ const Register = () => {
                   onClick={handleGoogleSignIn}
                   className="flex justify-center items-center cursor-pointer border bg-emerald-200 hover:bg-emerald-300 rounded-full"
                 >
-                  <img className="w-12 " src={''} alt="" />
+                  <img className="w-12 " src={GoogleSvg } alt="" />
                   <p className="px-4">continue with google</p>
                 </div>
-                <div
-                  onClick={''}
-                  className="flex justify-center items-center cursor-pointer border bg-gray-300 hover:bg-gray-400 rounded-full"
-                >
-                  <img className="w-12 " src={''} alt="" />
-                  <p className="px-4">continue with Github</p>
-                </div>
+               <Toaster></Toaster>
               </div>
             </form>
           </div>

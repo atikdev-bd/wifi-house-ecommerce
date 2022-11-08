@@ -6,8 +6,8 @@ import Service from "../Service/Service";
 import Slider from "../Slider/Slider";
 
 const Home = () => {
-  const { services } = useContext(AuthContext);
-  console.log(services);
+  const { services ,loading} = useContext(AuthContext);
+
 
   return (
     <div>

@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import toast, { Toaster } from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import GoogleSvg from "../../Assets/svg/icons8-google.svg";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const Login = () => {
@@ -96,15 +97,8 @@ const Login = () => {
                 id="login-id"
                 className="flex justify-center items-center border cursor-pointer bg-emerald-200 hover:bg-emerald-300  rounded-full"
               >
-                <img className="w-12 " src={""} alt="" />
+                <img className="w-12 " src={GoogleSvg} alt="" />
                 <p className="px-4">continue with google</p>
-              </div>
-              <div
-                onClick={""}
-                className="flex justify-center items-center cursor-pointer border bg-gray-300 hover:bg-gray-400 rounded-full "
-              >
-                <img className="w-12 " src={""} alt="" />
-                <p className="px-4">continue with Github</p>
               </div>
             </div>
             <Toaster></Toaster>

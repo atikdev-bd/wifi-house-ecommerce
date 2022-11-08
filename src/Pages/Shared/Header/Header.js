@@ -1,26 +1,56 @@
-import React from "react";
+import React, { useContext } from "react";
+import  {toast, Toaster } from "react-hot-toast";
+import { FaSignOutAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext);
+  console.log(user);
+
+  const handleLogOut = () => {
+    logOut()
+      .then((res) => {
+        toast.success('logout successfully')
+      })
+      .catch((error) => {});
+  };
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-stone-600">
       <div className="flex-1">
         <Link className="btn btn-ghost normal-case text-xl">WIFI House</Link>
       </div>
       <div className="link-div mr-28 text-xl font-bold hidden lg:block">
-        <Link to="/home" className="mr-3">
-          Home
-        </Link>
-        <Link to='/addService' className="mr-3 hover:text-cyan-400">Add Service</Link>
-        <Link className="mr-3 hover:text-blue-900">Blogs</Link>
-        <Link className="mr-3 hover:text-yellow-700">My Review</Link>
-        <Link to="/login" className="mr-3 hover:text-sky-700">
-          Login
-        </Link>
-        <Link to="register" className="mr-3 hover:text-green-500">
-          Register
-        </Link>
+        {user?.uid ? (
+          <>
+            {" "}
+            <div className="flex">
+              <div>
+                <Link to="/addService" className="mr-3 hover:text-cyan-400">
+                  Add Service
+                </Link>
+                <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+                <Link className="mr-3 hover:text-yellow-700">My Review</Link>
+              </div>
+              <div className="ml-4 mt-1">
+                  <FaSignOutAlt onClick={handleLogOut} className="hover:text-stone-400"></FaSignOutAlt>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to="/home" className="mr-3">
+              Home
+            </Link>
+            <Link to="/login" className="mr-3 hover:text-sky-700">
+              Login
+            </Link>
+            <Link to="register" className="mr-3 hover:text-green-500">
+              Register
+            </Link>
+          </>
+        )}
       </div>
 
       <div className="flex-none gap-2">
@@ -70,6 +100,7 @@ const Header = () => {
               <Link>Logout</Link>
             </li>
           </ul>
+          <Toaster></Toaster>
         </div>
       </div>
     </div>
