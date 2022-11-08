@@ -6,20 +6,20 @@ import React, { createContext, useEffect, useState } from 'react';
 
 const AuthProvider = ({children}) => {
 
-    const [service, setService ] = useState([])
-    console.log(service)
+    const [services, setServices ] = useState([])
+    
 
     useEffect(()=>{
 
      fetch('http://localhost:5000/services')
      .then(res => res.json())
-     .then(data => setService(data))
+     .then(data => setServices(data))
        .catch(error =>console.log(error))
 
 
     },[])
 
-    const info ={}
+    const info ={services}
 
     return (
         <AuthContext.Provider value={info}>

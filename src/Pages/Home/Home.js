@@ -1,42 +1,30 @@
-import React from 'react';
+import React, { useContext } from "react";
+
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import Service from "../Service/Service";
+import Slider from "../Slider/Slider";
 
 const Home = () => {
+  const { services } = useContext(AuthContext);
+  console.log(services);
 
+  return (
+    <div>
+      <div>
+        <Slider></Slider>
+      </div>
 
-    return (
-        <div>
-         <div className="carousel w-full">
-  <div id="slide1" className="carousel-item relative w-full">
-    <img src="https://placeimg.com/800/200/arch" className="w-full" />
-    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-      <a href="#slide4" className="btn btn-circle">❮</a> 
-      <a href="#slide2" className="btn btn-circle">❯</a>
+      <div className="grid lg:grid-cols-1 gap-4 mx-8  mt-14 ">
+        {" "}
+        {services.map((service) => (
+          <Service key={service._id} service={service}></Service>
+        ))}
+      </div>
+     <div className="flex justify-center">
+     <button className="btn no-animation hover:bg-stone-500">Show All</button>
+     </div>
     </div>
-  </div> 
-  <div id="slide2" className="carousel-item relative w-full">
-    <img src="https://placeimg.com/800/200/arch" className="w-full" />
-    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-      <a href="#slide1" className="btn btn-circle">❮</a> 
-      <a href="#slide3" className="btn btn-circle">❯</a>
-    </div>
-  </div> 
-  <div id="slide3" className="carousel-item relative w-full">
-    <img src="https://placeimg.com/800/200/arch" className="w-full" />
-    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-      <a href="#slide2" className="btn btn-circle">❮</a> 
-      <a href="#slide4" className="btn btn-circle">❯</a>
-    </div>
-  </div> 
-  <div id="slide4" className="carousel-item relative w-full">
-    <img src="https://placeimg.com/800/200/arch" className="w-full" />
-    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-      <a href="#slide3" className="btn btn-circle">❮</a> 
-      <a href="#slide1" className="btn btn-circle">❯</a>
-    </div>
-  </div>
-</div> 
-        </div>
-    );
+  );
 };
 
 export default Home;
