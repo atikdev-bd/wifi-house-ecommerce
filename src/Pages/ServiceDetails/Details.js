@@ -1,13 +1,14 @@
 import { useContext, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import Lottie from "react-lottie-player";
-import { useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import Review from "../../Assets/review.json";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import "./Details.css";
 const Details = () => {
   const [products, setProducts] = useState({});
   const { id } = useParams();
-  const {user} = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const url = `http://localhost:5000/service/${id}`;
@@ -17,6 +18,27 @@ const Details = () => {
         setProducts(data);
       });
   }, [id]);
+
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    const reviews = {
+      email: products?.email,
+      image: products?.image,
+      serviceName: products?.serviceName,
+      review: data.review,
+    };
+
+    fetch("http://localhost:5000/review", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(reviews),
+    })
+      .then((res) => res.json())
+      .then((data) => {});
+  };
 
   return (
     <div className="mt-6 mx-6">
@@ -52,32 +74,67 @@ const Details = () => {
             ></Lottie>
           </div>
           <div>
-            <div className="card flex-shrink-0 w-full bg-gray-700  max-w-sm shadow-2xl bg-base-100">
-              <div className="card-body">
-                <div className="form-control">
-                  <h1 className="text-xl mb-4 font-semibold text-sky-100">
-                    {" "}
-                    Service : {products?.serviceName}
-                  </h1>
+            {user?.uid ? (
+              <>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="card flex-shrink-0 w-full bg-gray-700  max-w-sm shadow-2xl"
+                >
+                  <div className="card-body">
+                    <div className="form-control">
+                      <h1 className="text-xl mb-4 font-semibold text-sky-100">
+                        {" "}
+                        Service : {products?.serviceName}
+                      </h1>
 
-                  <input
-                    type="text"
-                    readOnly
-                    defaultValue={user?.email}
-                    placeholder="email"
-                    className="input input-bordered rounded-sm"
-                  />
-                </div>
+                      <input
+                        {...register("email")}
+                        type="text"
+                        name="email"
+                        readOnly
+                        defaultValue={user?.email}
+                        placeholder="email"
+                        className="input input-bordered rounded-sm"
+                      />
+                      <input
+                        {...register("serviceName")}
+                        type="text"
+                        name="serviceName"
+                        defaultValue={products?.serviceName}
+                        readOnly
+                        placeholder="serviceName"
+                        className="input input-bordered mt-2 rounded-sm"
+                      />
+                      <input
+                        {...register("image")}
+                        type="text"
+                        defaultValue={products?.image}
+                        readOnly
+                        name="image"
+                        placeholder="photo URL"
+                        className="input mt-2 input-bordered rounded-sm"
+                      />
+                    </div>
 
-                <textarea
-                  className="textarea textarea-primary rounded-sm"
-                  placeholder="Add your review"
-                ></textarea>
-                <div className="form-control mt-6">
-                  <button className="btn btn-primary">Add</button>
-                </div>
-              </div>
-            </div>
+                    <textarea
+                      {...register("review")}
+                      className="textarea textarea-primary rounded-sm"
+                      placeholder="Add your review"
+                      name="review"
+                    ></textarea>
+                    <div className="form-control mt-6">
+                      <button className="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                </form>
+              </>
+            ) : (
+              <>
+                <button className="btn  link">
+                  <Link to="/login"> please login first and add a review</Link>
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
