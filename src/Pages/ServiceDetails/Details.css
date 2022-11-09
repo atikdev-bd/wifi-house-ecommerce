@@ -1,0 +1,4 @@
+.review-section{
+    display: gird;
+    grid-template-columns: 1fr 1fr;
+}

@@ -19,7 +19,9 @@ const Header = () => {
   return (
     <div className="navbar bg-stone-600">
       <div className="flex-1">
-        <Link className="btn btn-ghost normal-case text-xl">WIFI House</Link>
+        <Link to="/home" className="btn btn-ghost normal-case text-xl">
+          WIFI House
+        </Link>
       </div>
       <div className="link-div mr-28 text-xl font-bold hidden lg:block">
         {user?.uid ? (
@@ -27,11 +29,16 @@ const Header = () => {
             {" "}
             <div className="flex">
               <div>
+                <Link to="/home" className="mr-3">
+                  Home
+                </Link>
                 <Link to="/addService" className="mr-3 hover:text-cyan-400">
                   Add Service
                 </Link>
                 <Link className="mr-3 hover:text-blue-900">Blogs</Link>
-                <Link className="mr-3 hover:text-yellow-700">My Review</Link>
+                <Link to="/review" className="mr-3 hover:text-yellow-700">
+                  My Review
+                </Link>
               </div>
               <div className="ml-4 mt-1">
                 <FaSignOutAlt
@@ -45,6 +52,13 @@ const Header = () => {
           <>
             <Link to="/home" className="mr-3">
               Home
+            </Link>
+            <Link to="/addService" className="mr-3 hover:text-cyan-400">
+              Add Service
+            </Link>
+            <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+            <Link to="/review" className="mr-3 hover:text-yellow-700">
+              My Review
             </Link>
             <Link to="/login" className="mr-3 hover:text-sky-700">
               Login
@@ -77,15 +91,20 @@ const Header = () => {
                   {" "}
                   <li>
                     {" "}
-                    <Link className="mr-3 hover:text-cyan-400">
+                    <Link to="/addService" className="mr-3 hover:text-cyan-400">
                       Add Service
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/home" className="mr-3">
+                      Home
                     </Link>
                   </li>
                   <li>
                     <Link className="mr-3 hover:text-blue-900">Blogs</Link>
                   </li>
                   <li>
-                    <Link className="mr-3 hover:text-yellow-700">
+                    <Link to="/review" className="mr-3 hover:text-yellow-700">
                       My Review
                     </Link>
                   </li>
@@ -97,6 +116,12 @@ const Header = () => {
                 <>
                   <li>
                     {" "}
+                    <Link to="/home" className="mr-3">
+                      Home
+                    </Link>
+                  </li>
+                  <li>
+                    {" "}
                     <Link to="register" className="mr-3 hover:text-green-500">
                       Register
                     </Link>
@@ -104,6 +129,20 @@ const Header = () => {
                   <li>
                     <Link to="/login" className="mr-3 hover:text-sky-700">
                       Login
+                    </Link>
+                  </li>
+                  <li>
+                    {" "}
+                    <Link to="/addService" className="mr-3 hover:text-cyan-400">
+                      Add Service
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+                  </li>
+                  <li>
+                    <Link to="/review" className="mr-3 hover:text-yellow-700">
+                      My Review
                     </Link>
                   </li>
                 </>

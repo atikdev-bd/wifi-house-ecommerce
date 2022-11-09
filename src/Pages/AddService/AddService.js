@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import  { toast,Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const AddService = () => {
+  const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -15,14 +17,11 @@ const AddService = () => {
       },
       body: JSON.stringify(data),
     })
-    .then(res =>res.json())
-    .then(data =>{
-      console.log(data)
-      
-    })
-    
-    
-   
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+    navigate("/");
   };
   return (
     <div>
