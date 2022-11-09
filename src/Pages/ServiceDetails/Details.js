@@ -23,11 +23,12 @@ const Details = () => {
 
   const onSubmit = (data) => {
     const reviews = {
-      email: products?.email,
+      email: user?.email,
       image: products?.image,
       serviceName: products?.serviceName,
       review: data.review,
     };
+    console.log(reviews)
 
     fetch("http://localhost:5000/review", {
       method: "POST",
