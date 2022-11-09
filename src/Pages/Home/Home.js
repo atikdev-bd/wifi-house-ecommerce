@@ -6,6 +6,7 @@ import wifi from "../../Assets/wifi.json";
 import wifi2 from "../../Assets/wifi2.json";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import About from "../About/About";
+import AboutUs from "../AboutUs/AboutUs";
 import Service from "../Service/Service";
 import Slider from "../Slider/Slider";
 
@@ -42,6 +43,7 @@ const Home = () => {
         </Link>
       </div>
       <About></About>
+      <AboutUs></AboutUs>
     </div>
   );
 };

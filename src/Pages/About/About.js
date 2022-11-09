@@ -6,7 +6,7 @@ import img3 from "../../Assets/aboutImg/icons8-service-58 (1).png";
 const About = () => {
   return (
     <div>
-      <h1 className="text-center">Why you should take our service</h1>
+      <h1 className="text-center text-xl mt-4 text-gray-900 font-bold">Why you should take our service .</h1>
       <div className="flex justify-evenly mt-8 ">
         <div>
           <div className="item-center text-center">
