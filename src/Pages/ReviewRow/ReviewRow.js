@@ -1,8 +1,8 @@
 import React from "react";
 import DeleteIcon from "../../Assets/icon/icons8-remove-64.png";
 
-const ReviewRow = ({ rev, handleDelete }) => {
-  const { image, review, serviceName, _id } = rev;
+const ReviewRow = ({ rev, handleDelete, handleUpdate }) => {
+  const { image, review, serviceName, _id, status } = rev;
 
   return (
     <tr>
@@ -28,7 +28,14 @@ const ReviewRow = ({ rev, handleDelete }) => {
       <td>{serviceName}</td>
       <td>{review}</td>
       <th>
-        <button className="btn btn-ghost bg-green-400 btn-xs">Update</button>
+        <button
+          onClick={() => handleUpdate(_id)}
+          className="btn btn-ghost bg-green-400 btn-xs"
+        >
+          {
+            status ? status : 'Pending'
+          }
+        </button>
       </th>
     </tr>
   );

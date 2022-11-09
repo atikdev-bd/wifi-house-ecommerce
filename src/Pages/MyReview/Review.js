@@ -34,6 +34,26 @@ const Review = () => {
         });
     }
   };
+  const handleUpdate = (id) => {
+    fetch(`http://localhost:5000/review/${id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status: "Approved" }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+       
+        if (data.modifiedCount > 0) {
+          const remaining = review.filter((rev) => rev._id !== id);
+          const update = review.find((rev) => rev._id === id);
+          update.status = "Approved";
+          const newReview = [...remaining, update];
+          setReview(newReview);
+        }
+      });
+  };
 
   return (
     <div className="overflow-x-auto w-full">
@@ -57,6 +77,7 @@ const Review = () => {
             <ReviewRow
               key={rev._id}
               rev={rev}
+              handleUpdate={handleUpdate}
               handleDelete={handleDelete}
             ></ReviewRow>
           ))}

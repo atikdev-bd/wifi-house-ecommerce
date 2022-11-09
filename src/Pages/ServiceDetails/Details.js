@@ -28,7 +28,7 @@ const Details = () => {
       serviceName: products?.serviceName,
       review: data.review,
     };
-    console.log(reviews)
+  
 
     fetch("http://localhost:5000/review", {
       method: "POST",
