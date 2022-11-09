@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import userIcon from "../../../Assets/img/icons8-user-64.png";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import "./Header.css";
+import titleIcon from '../../../Assets/logo/icons8-wifi-64.png'
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -17,10 +18,11 @@ const Header = () => {
       .catch((error) => {});
   };
   return (
-    <div className="navbar bg-stone-600">
+    <div className="navbar bg-stone-300">
       <div className="flex-1">
-        <Link to="/home" className="btn btn-ghost normal-case text-xl">
-          WIFI House
+        <Link to="/home" > <img src={titleIcon} alt="" /></Link>
+        <Link to="/home" className="btn btn-ghost normal-case">
+        <span className="text-4xl font-bold">WIFI</span><span className="text-xl">House </span>
         </Link>
       </div>
       <div className="link-div mr-28 text-xl font-bold hidden lg:block">
@@ -32,7 +34,7 @@ const Header = () => {
                 <Link to="/home" className="mr-3">
                   Home
                 </Link>
-                <Link to="/addService" className="mr-3 hover:text-cyan-400">
+                <Link to="/addService" className="mr-3 hover:text-cyan-900">
                   Add Service
                 </Link>
                 <Link className="mr-3 hover:text-blue-900">Blogs</Link>
