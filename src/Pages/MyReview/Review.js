@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 import UpdateIcon from "../../Assets/icon/icons8-available-updates-50.png";
 import DeleteIcon from "../../Assets/icon/icons8-trash-50.png";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
@@ -44,7 +45,6 @@ const Review = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-       
         if (data.modifiedCount > 0) {
           const remaining = review.filter((rev) => rev._id !== id);
           const update = review.find((rev) => rev._id === id);
@@ -56,33 +56,46 @@ const Review = () => {
   };
 
   return (
-    <div className="overflow-x-auto w-full">
-      <table className="table w-full">
-        <thead>
-          <tr>
-            <th>
-              <img src={DeleteIcon} alt="" />
-            </th>
-            <th>Service Photo</th>
-            <th>Service Name</th>
-            <th>Customer Review</th>
-            <th>
-              {" "}
-              <img src={UpdateIcon} alt="" />
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {review.map((rev) => (
-            <ReviewRow
-              key={rev._id}
-              rev={rev}
-              handleUpdate={handleUpdate}
-              handleDelete={handleDelete}
-            ></ReviewRow>
-          ))}
-        </tbody>
-      </table>
+    <div>
+      {review.length ? (
+        <>
+          <div className="overflow-x-auto w-full">
+            <table className="table w-full">
+              <thead>
+                <tr>
+                  <th>
+                    <img src={DeleteIcon} alt="" />
+                  </th>
+                  <th>Service Photo</th>
+                  <th>Service Name</th>
+                  <th>Customer Review</th>
+                  <th>
+                    {" "}
+                    <img src={UpdateIcon} alt="" />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {review.map((rev) => (
+                  <ReviewRow
+                    key={rev._id}
+                    rev={rev}
+                    handleUpdate={handleUpdate}
+                    handleDelete={handleDelete}
+                  ></ReviewRow>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      ) : (
+        <h1 className="text-2xl font-semibold text-gray-900 text-center">
+          You have no review{" "}
+          <button className="btn btn-link">
+            <Link to="/">Go home page and click details</Link>
+          </button>{" "}
+        </h1>
+      )}
     </div>
   );
 };
