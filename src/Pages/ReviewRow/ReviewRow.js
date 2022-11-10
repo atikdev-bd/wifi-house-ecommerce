@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import DeleteIcon from "../../Assets/icon/icons8-remove-64.png";
 
 const ReviewRow = ({ rev, handleDelete, handleUpdate }) => {
-  const { image, review, serviceName, _id, status } = rev;
+  const { image, review, serviceName, _id,  } = rev;
 
   return (
     <tr>

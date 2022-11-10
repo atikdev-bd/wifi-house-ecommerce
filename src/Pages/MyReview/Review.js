@@ -35,7 +35,7 @@ const Review = () => {
   const handleDelete = (id) => {
     const proceed = window.confirm("are you sure you delete this review");
     if (proceed) {
-      fetch(`http://localhost:5000/review/${id}`, {
+      fetch(`https://brod-brand-server-side.vercel.app/review/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -49,7 +49,7 @@ const Review = () => {
     }
   };
   const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/review/${id}`, {
+    fetch(`https://brod-brand-server-side.vercel.app/review/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
