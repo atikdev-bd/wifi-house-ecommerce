@@ -4,8 +4,11 @@ import { toast, Toaster } from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import GoogleSvg from "../../Assets/svg/icons8-google.svg";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../UseTitle/UseTitle";
 
 const Login = () => {
+
+  useTitle('Login')
   const navigate = useNavigate();
 
   const location = useLocation();

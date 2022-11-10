@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import DeleteIcon from "../../Assets/icon/icons8-remove-64.png";
 
 const ReviewRow = ({ rev, handleDelete, handleUpdate }) => {
@@ -20,7 +21,7 @@ const ReviewRow = ({ rev, handleDelete, handleUpdate }) => {
         <div className="flex items-center space-x-3">
           <div className="avatar">
             <div className="mask mask-squircle w-12 h-12">
-              <img src={image} alt="Avatar Tailwind CSS Component" />
+              <img src={image} alt="" />
             </div>
           </div>
         </div>
@@ -28,14 +29,16 @@ const ReviewRow = ({ rev, handleDelete, handleUpdate }) => {
       <td>{serviceName}</td>
       <td>{review}</td>
       <th>
-        <button
-          onClick={() => handleUpdate(_id)}
-          className="btn btn-ghost bg-green-400 btn-xs"
-        >
-          {
-            status ? status : 'Pending'
-          }
-        </button>
+        <Link to={`/edit/${_id}`}>
+          <button
+            onClick={() => handleUpdate(_id)}
+            className="btn btn-ghost bg-green-400 btn-xs"
+          >
+            <a href="#my-modal-2" className="btn">
+             Update
+            </a>
+          </button>
+        </Link>
       </th>
     </tr>
   );

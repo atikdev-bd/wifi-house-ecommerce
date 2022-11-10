@@ -1,15 +1,17 @@
 import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../UseTitle/UseTitle";
 
 const AddService = () => {
+
+  useTitle('Add Service')
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     fetch("http://localhost:5000/add", {
       method: "POST",
       headers: {
@@ -19,9 +21,11 @@ const AddService = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        console.log(data)
+        toast.success('Add service successfully')
+        
       });
-    navigate("/");
+       navigate('/allService')
   };
   return (
     <div>

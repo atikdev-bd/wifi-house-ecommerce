@@ -37,7 +37,7 @@ const Header = () => {
                 <Link to="/addService" className="mr-3 hover:text-cyan-900">
                   Add Service
                 </Link>
-                <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+                <Link to='/blogs' className="mr-3 hover:text-blue-900">Blogs</Link>
                 <Link to="/review" className="mr-3 hover:text-yellow-700">
                   My Review
                 </Link>
@@ -103,7 +103,7 @@ const Header = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link className="mr-3 hover:text-blue-900">Blogs</Link>
+                    <Link to='/blogs' className="mr-3 hover:text-blue-900">Blogs</Link>
                   </li>
                   <li>
                     <Link to="/review" className="mr-3 hover:text-yellow-700">

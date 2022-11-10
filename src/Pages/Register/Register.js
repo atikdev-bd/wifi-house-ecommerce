@@ -4,8 +4,11 @@ import  {toast, Toaster } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import GoogleSvg from '../../Assets/svg/icons8-google.svg'
+import useTitle from '../../UseTitle/UseTitle';
 
 const Register = () => {
+
+  useTitle('Register')
 
 
     const navigate = useNavigate();

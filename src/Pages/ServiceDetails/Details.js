@@ -23,6 +23,7 @@ const Details = () => {
 
   const onSubmit = (data) => {
     const reviews = {
+      
       email: user?.email,
       image: products?.image,
       serviceName: products?.serviceName,
@@ -58,9 +59,7 @@ const Details = () => {
               <p className="text-xl font-bold text-orange-500">
                 price : $ {products?.price}
               </p>
-              <div className="card-actions justify-end">
-                <button className="btn btn-primary">Buy Now</button>
-              </div>
+             
             </div>
           </div>
         </div>
@@ -70,7 +69,7 @@ const Details = () => {
         <div className="review-section lg:flex justify-center">
           <div className="ml-8">
             <Lottie
-              className=" w-64  lg:w-96 mr-2"
+              className=" w-64 mt-6 lg:mt-0  lg:w-96 mr-2"
               animationData={Review}
             ></Lottie>
           </div>
@@ -79,14 +78,15 @@ const Details = () => {
               <>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="card flex-shrink-0 w-full bg-gray-700  max-w-sm shadow-2xl"
+                  className="card flex-shrink-0 w-full mt-4 lg:mt-0  bg-gray-700  max-w-sm shadow-2xl"
                 >
                   <div className="card-body">
                     <div className="form-control">
-                      <h1 className="text-xl mb-4 font-semibold text-sky-100">
+                      <h1 className="text-xl  font-semibold text-sky-100">
                         {" "}
                         Service : {products?.serviceName}
                       </h1>
+                      <p className="text-white my-2">Id : {id}</p>
 
                       <input
                         {...register("email")}

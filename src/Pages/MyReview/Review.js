@@ -1,23 +1,36 @@
 import React, { useContext, useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { toast, Toaster } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import UpdateIcon from "../../Assets/icon/icons8-available-updates-50.png";
 import DeleteIcon from "../../Assets/icon/icons8-trash-50.png";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
+import useTitle from "../../UseTitle/UseTitle";
 import ReviewRow from "../ReviewRow/ReviewRow";
 
 const Review = () => {
-  const { user } = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
 
   const [review, setReview] = useState([]);
+ useTitle('Review')
+
 
   useEffect(() => {
-    fetch(`http://localhost:5000/reviews?email=${user?.email}`)
-      .then((res) => res.json())
+    fetch(`http://localhost:5000/reviews?email=${user?.email}`, {
+      headers: {
+        authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    })
+      .then((res) => {
+        if (res.status === 401 || res.status === 403) {
+          toast.success("Unauthorized Access");
+          return logOut();
+        }
+        return res.json();
+      })
       .then((data) => {
         setReview(data);
       });
-  }, [user?.email]);
+  }, [user?.email, logOut]);
 
   const handleDelete = (id) => {
     const proceed = window.confirm("are you sure you delete this review");
@@ -48,7 +61,9 @@ const Review = () => {
         if (data.modifiedCount > 0) {
           const remaining = review.filter((rev) => rev._id !== id);
           const update = review.find((rev) => rev._id === id);
-          update.status = "Approved";
+
+       const one = update.review 
+       console.log(one)// = "Approved"; //thats
           const newReview = [...remaining, update];
           setReview(newReview);
         }
@@ -71,7 +86,7 @@ const Review = () => {
                   <th>Customer Review</th>
                   <th>
                     {" "}
-                    <img src={UpdateIcon} alt="" />
+                    <img className="ml-5" src={UpdateIcon} alt="" />
                   </th>
                 </tr>
               </thead>
@@ -90,12 +105,13 @@ const Review = () => {
         </>
       ) : (
         <h1 className="text-2xl font-semibold text-gray-900 text-center">
-          You have no review{" "}
+         No reviews were added{" "}
           <button className="btn btn-link">
             <Link to="/">Go home page and click details</Link>
           </button>{" "}
         </h1>
       )}
+      <Toaster></Toaster>
     </div>
   );
 };
