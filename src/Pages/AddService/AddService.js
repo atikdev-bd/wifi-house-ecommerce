@@ -12,7 +12,7 @@ const AddService = () => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    fetch("http://localhost:5000/add", {
+    fetch("https://brod-brand-server-side.vercel.app/add", {
       method: "POST",
       headers: {
         "content-type": "application/json",

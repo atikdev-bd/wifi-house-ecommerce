@@ -10,7 +10,7 @@ const Service = ({ service }) => {
     <PhotoProvider>
       <div className="card lg:card-side bg-base-100 lg:h-[300px]  shadow-xl mb-4">
         <figure>
-          <PhotoView src={service?.image}>
+          <PhotoView src={image}>
             <img
               className=" w-[400px]lg:w-[600px]  lg:h-full"
               src={service.image}

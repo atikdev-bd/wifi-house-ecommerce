@@ -11,7 +11,7 @@ const Details = () => {
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
-    const url = `http://localhost:5000/service/${id}`;
+    const url = `https://brod-brand-server-side.vercel.app/service/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
@@ -31,7 +31,7 @@ const Details = () => {
     };
   
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://brod-brand-server-side.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",

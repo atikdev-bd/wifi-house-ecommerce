@@ -13,7 +13,7 @@ import Slider from "../Slider/Slider";
 import "./Home.css";
 
 const Home = () => {
-  const { services, loading } = useContext(AuthContext);
+  const { services,} = useContext(AuthContext);
   useTitle('Home')
 
   return (
