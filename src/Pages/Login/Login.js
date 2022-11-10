@@ -44,7 +44,7 @@ const Login = () => {
         }
         console.log(currentUser);
         ///Get jwt token ///
-        fetch('http://localhost:5000/jwt',{
+        fetch('https://brod-brand-server-side.vercel.app/jwt',{
          method : "POST",
          headers : {
           'content-type' : 'application/json',

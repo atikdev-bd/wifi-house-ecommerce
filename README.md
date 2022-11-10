@@ -1,10 +1,14 @@
 # WIFI House projects !
 
 
-[Github server side code link](https://github.com/programming-hero-web-course2/b6-quiz-crackerz-atikdev-bd.git)
+[Github server side code link](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-server-side-atikdev-bd.git)
 
 
-[Netlify live site link](https://quiz-camp-site.netlify.app/)
+[Github client side code link](https://github.com/Porgramming-Hero-web-course/b6a11-service-review-client-side-atikdev-bd.git)
+
+
+
+[Netlify live site link](https://wifi-house.netlify.app/)
 
 ## Key specification:
 * set a page for 404 not found.

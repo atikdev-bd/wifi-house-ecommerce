@@ -8,7 +8,7 @@ import useTitle from "../../UseTitle/UseTitle";
 import ReviewRow from "../ReviewRow/ReviewRow";
 
 const Review = () => {
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut ,loading } = useContext(AuthContext);
 
   const [review, setReview] = useState([]);
  useTitle('Review')
@@ -43,6 +43,7 @@ const Review = () => {
           if (data.deletedCount) {
             toast.success("Delete Successfully");
             const remainingReview = review.filter((data) => data?._id !== id);
+            loading(true)
             setReview(remainingReview);
           }
         });
