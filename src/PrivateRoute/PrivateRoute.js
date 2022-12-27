@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 import { AuthContext } from "../Context/AuthProvider/AuthProvider";
 
 const PrivateRoute = ({ children }) => {
@@ -7,9 +8,14 @@ const PrivateRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
   if (loading) {
     return (
-      <div className="flex justify-center items-center mt-14">
-        <h1>loading....</h1>
-      </div>
+      <div className="items-center flex justify-center ">
+      <ClipLoader
+        loading={loading}
+        size={150}
+        aria-label="Loading Spinner"
+        data-testid="loader"
+      />
+    </div>
     );
   }
   if (!user) {

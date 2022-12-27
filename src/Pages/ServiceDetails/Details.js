@@ -1,7 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import Lottie from "react-lottie-player";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import Review from "../../Assets/review.json";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import "./Details.css";
@@ -9,6 +10,8 @@ const Details = () => {
   const [products, setProducts] = useState({});
   const { id } = useParams();
   const { user } = useContext(AuthContext);
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const url = `https://brod-brand-server-side.vercel.app/service/${id}`;
@@ -39,7 +42,10 @@ const Details = () => {
       body: JSON.stringify(reviews),
     })
       .then((res) => res.json())
-      .then((data) => {});
+      .then((data) => {
+        toast.success('Review submit')
+        navigate('/review')
+      });
   };
 
   return (
@@ -137,6 +143,7 @@ const Details = () => {
               </>
             )}
           </div>
+          <Toaster></Toaster>
         </div>
       </div>
     </div>

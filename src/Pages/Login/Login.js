@@ -7,8 +7,7 @@ import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import useTitle from "../../UseTitle/UseTitle";
 
 const Login = () => {
-
-  useTitle('Login')
+  useTitle("Login");
   const navigate = useNavigate();
 
   const location = useLocation();
@@ -31,34 +30,46 @@ const Login = () => {
       })
       .catch((error) => {
         const err = error?.message;
-        toast.error(err);
+        if (err === "Firebase: Error (auth/wrong-password).") {
+          return toast.error("Wrong password");
+        }
+        if (err === "Firebase: Error (auth/user-not-found).") {
+          return toast.error("User not found");
+        }
+        if (
+          err ===
+          "Firebase: Access to this account has been temporarily disabled due to many failed login attempts. You can immediately restore it by resetting your password or you can try again later. (auth/too-many-requests)."
+        ) {
+          return toast.error(
+            "Access to this account has been temporarily disabled due to many failed login attempts."
+          );
+        }
       });
   };
   const handleGoogleSignIn = () => {
     googleLogin()
       .then((result) => {
-        const user = result.user 
+        const user = result?.user;
         const currentUser = {
-          email : user.email
-          
-        }
+          email: user?.email,
+        };
         console.log(currentUser);
         ///Get jwt token ///
-        fetch('https://brod-brand-server-side.vercel.app/jwt',{
-         method : "POST",
-         headers : {
-          'content-type' : 'application/json',
-         },
-         body : JSON.stringify(currentUser)
+        fetch("https://brod-brand-server-side.vercel.app/jwt", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(currentUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            localStorage.setItem("token", data.token);
+          });
 
-        })
-        .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          localStorage.setItem('token', data.token)
-        })
-        navigate(from, { replace: true });
         toast.success("Login Successfully");
+        navigate(from, { replace: true });
       })
       .catch((error) => toast.error(error.message));
   };

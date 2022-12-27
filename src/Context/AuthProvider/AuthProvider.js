@@ -18,8 +18,14 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [reviews, setReviews] = useState();
 
   const [services, setServices] = useState([]);
+  const [updateReview, serUpdateReview] = useState({});
+
+  const newReview = (curRev) => {
+    return serUpdateReview(curRev);
+  };
 
   useEffect(() => {
     fetch("https://brod-brand-server-side.vercel.app/services")
@@ -51,7 +57,6 @@ const AuthProvider = ({ children }) => {
   ///sign out ////
   const logOut = () => {
     setLoading(true);
-    localStorage.removeItem("token");
     return signOut(auth);
   };
 
@@ -81,6 +86,10 @@ const AuthProvider = ({ children }) => {
     loading,
     setError,
     userUpdateProfile,
+    setReviews,
+    reviews,
+    newReview,
+    updateReview,
   };
 
   return <AuthContext.Provider value={info}>{children}</AuthContext.Provider>;

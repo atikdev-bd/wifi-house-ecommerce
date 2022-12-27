@@ -60,7 +60,7 @@ const Register = () => {
         <div className="hero min-h-screen bg-base-200">
           <div className="hero-content flex-col">
             <div className="text-center lg:text-left">
-              <h1 className="text-5xl font-bold">Pleaser Register !</h1>
+              <h1 className="text-5xl font-bold"> Register Here !</h1>
             </div>
   
             <form

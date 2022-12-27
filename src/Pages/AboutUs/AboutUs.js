@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import img from '../../Assets/img/Lovepik_com-500678624-mobile-phone-intelligent-wifi-background (1).jpg'
 import img2 from  '../../Assets/img/NicePng_internet-globe-png_4139394.png'
 
@@ -16,7 +17,7 @@ const AboutUs = () => {
                 Expertise of our staff in this profession</h1>
                 <p className="py-6">We always try our best to serve our customers properly and if there is any mistake you can complain to our support. </p>
                 <p className="py-6">We try our best to ensure that there are no mistakes and provide the right service that makes our customers more aware of coming to us. </p>
-                <button className="btn btn-primary">Get More Info</button>
+                <Link to='/info'><button className="btn btn-primary">Get More Info</button></Link>
             </div>
         </div>
     </div>

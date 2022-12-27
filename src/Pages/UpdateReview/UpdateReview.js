@@ -1,29 +1,64 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useParams } from "react-router-dom";
+import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 
 const UpdateReview = () => {
-  const id = useParams();
-  console.log(id);
+  const { reviews,newReview } = useContext(AuthContext);
+
+  const { id } = useParams();
+  console.log(reviews);
+
+  const update = reviews.find((rev) => rev._id === id);
+
+  const currentUpdate = (e) => {
+    e.preventDefault();
+    const value = e.target.review.value;
+    const updateReview = {
+      review : value 
+    }
+    newReview(updateReview)
+    e.target.reset()
+  };
+    
   return (
     <>
-      {/* The button to open modal */}
-      <a href="#my-modal-2" className="btn">
-        open modal
-      </a>
-      {/* <p>{/<em> Put this part before </body> tag </em>/}</p> */}
-      <div className="modal" id="my-modal-2">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">
-            Congratulations random Internet user!
+      {/* Put this part before </body> tag */}
+
+      <input type="checkbox" id="my-modal-3" className="modal-toggle" />
+      <div className="modal">
+        <div className="modal-box relative">
+          <label
+            htmlFor="my-modal-3"
+            className="btn btn-sm btn-circle absolute right-2 top-2"
+          >
+            ✕
+          </label>
+          <h3 className="text-lg font-bold">
+            Now change your previous review !
           </h3>
-          <p className="py-4">
-            You've been selected for a chance to get one year of subscription to
-            use Wikipedia for free!
-          </p>
-          <div className="modal-action">
-            <a href="#" className="btn">
-              Yay!
-            </a>
+          <form onSubmit={currentUpdate}>
+            <textarea
+              name="review"
+              className="textarea textarea-bordered rounded-sm"
+              placeholder="write your review"
+            ></textarea>
+            <br />
+            <button className="btn btn-ghost text-end" type="submit">
+              Submit Review
+            </button>
+          </form>
+        </div>
+      </div>
+      <div>
+        <div className="card w-96 bg-primary m-8 text-primary-content">
+          <div className="card-body">
+            <h2 className="card-title">ServiceName : {update?.serviceName}</h2>
+            <p>Current Review : {update?.review}</p>
+            <div className="card-actions justify-end">
+              <label htmlFor="my-modal-3" className="btn">
+                Edit
+              </label>
+            </div>
           </div>
         </div>
       </div>
